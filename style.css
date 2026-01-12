@@ -1,0 +1,582 @@
+body {
+    background: #111;
+    color: white;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    margin: 0;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #333;
+    color: white;
+    border: 1px solid #666;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background: #555;
+}
+
+.code-container {
+    max-width: 800px;
+    text-align: left;
+}
+
+.keyword {
+    color: #569cd6;
+}
+
+.function-name {
+    color: #dcdcaa;
+}
+
+.parameter {
+    color: #9cdcfe;
+}
+
+.method {
+    color: #dcdcaa;
+}
+
+.string {
+    color: #ce9178;
+}
+
+.comment {
+    color: #6a9955;
+}
+
+.variable {
+    color: #9cdcfe;
+}
+
+.property {
+    color: #9cdcfe;
+}
+
+a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+#mobile-message {
+    display: none;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#welcome-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e1e1e;
+    color: #dcdcaa;
+    padding: 20px 30px;
+    border-radius: 10px;
+    border: 1px solid #666;
+    font-size: 18px;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.arrow {
+    color: #ccc;
+    font-weight: bold;
+}
+
+.description {
+    display: none;
+    position: absolute;
+    background: #222;
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 5px;
+    padding: 10px;
+    width: 350px;
+    z-index: 20;
+    font-size: 0.9em;
+    line-height: 1.4;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    word-wrap: break-word;
+}
+
+/* Left item: hover on left */
+.important:nth-child(1) .description {
+    right: 100%;
+    top: 0;
+    margin-right: 10px;
+}
+
+/* Center item: hover below */
+.important:nth-child(2) .description {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+}
+
+/* Right item: hover on right */
+.important:nth-child(3) .description {
+    left: 100%;
+    top: 0;
+    margin-left: 10px;
+}
+
+/* Skills: hover above */
+.skill .description {
+    bottom: 100%;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    width: 400px;
+}
+
+/* Experience: hover on right */
+.experience .description {
+    left: 100%;
+    top: 0;
+    margin-left: 10px;
+    width: 300px;
+}
+
+/* Hire Me Button */
+#hire-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #1a1a1a;
+    color: #dcdcaa;
+    border: 1px dashed #666;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+#hire-btn:hover {
+    background: #2a2a2a;
+    border-color: #888;
+    transform: scale(1.05);
+    color: #fff;
+}
+
+/* Contact Modal */
+#contact-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#contact-form {
+    background: #1e1e1e;
+    color: white;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #3e3e42;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    font-family: 'Fira Code', 'Courier New', monospace;
+    overflow: hidden;
+}
+
+#contact-form h3 {
+    background: #252526;
+    margin: 0;
+    padding: 10px 15px;
+    color: #cccccc;
+    font-size: 14px;
+    border-bottom: 1px solid #3e3e42;
+}
+
+#contact-form input, #contact-form textarea {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #3e3e42;
+    background: #3c3c3c;
+    color: white;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+#contact-form input:focus, #contact-form textarea:focus {
+    outline: none;
+    background: #1e1e1e;
+}
+
+#contact-form input::placeholder, #contact-form textarea::placeholder {
+    color: #cccccc;
+}
+
+#contact-form textarea {
+    border-bottom: none;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 10px 15px;
+}
+
+#contact-form button {
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+#contact-form button:hover {
+    background: #005a9e;
+}
+
+#contact-form button:last-child {
+    background: #cccccc;
+    color: #1e1e1e;
+}
+
+#contact-form button:last-child:hover {
+    background: #aaaaaa;
+}
+
+/* Light mode */
+body.light-mode {
+    background: #ffffff;
+    color: #1e1e1e;
+}
+
+body.light-mode .code-container {
+    background: #f8f8f8;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.light-mode .keyword {
+    color: #0000ff;
+    font-weight: bold;
+}
+
+body.light-mode .function-name {
+    color: #795e26;
+}
+
+body.light-mode .parameter {
+    color: #001080;
+}
+
+body.light-mode .method {
+    color: #795e26;
+}
+
+body.light-mode .string {
+    color: #a31515;
+}
+
+body.light-mode .comment {
+    color: #008000;
+    font-style: italic;
+}
+
+body.light-mode .variable {
+    color: #001080;
+}
+
+body.light-mode .property {
+    color: #001080;
+}
+
+body.light-mode .important {
+    background: rgba(0, 123, 255, 0.1);
+    border-color: #007bff;
+    color: #007bff;
+}
+
+body.light-mode .important:hover {
+    background: rgba(0, 123, 255, 0.2);
+}
+
+body.light-mode .description {
+    background: #ffffff;
+    border-color: #007bff;
+    color: #1e1e1e;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+body.light-mode #theme-toggle {
+    background: #f8f8f8;
+    color: #1e1e1e;
+    border-color: #e0e0e0;
+}
+
+body.light-mode #theme-toggle:hover {
+    background: #e0e0e0;
+}
+
+body.light-mode #hire-btn {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 2px 4px rgba(0,123,255,0.3);
+}
+
+body.light-mode #hire-btn:hover {
+    background: #0056b3;
+}
+
+body.light-mode #contact-modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+body.light-mode #contact-form {
+    background: #ffffff;
+    border-color: #e0e0e0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+body.light-mode #contact-form h3 {
+    color: #1e1e1e;
+    background: #f8f8f8;
+}
+
+body.light-mode #contact-form input, #contact-form textarea {
+    background: #ffffff;
+    border-color: #e0e0e0;
+    color: #1e1e1e;
+}
+
+body.light-mode #contact-form input::placeholder, #contact-form textarea::placeholder {
+    color: #888888;
+}
+
+body.light-mode #contact-form button {
+    background: #007bff;
+    color: white;
+}
+
+body.light-mode #contact-form button:hover {
+    background: #0056b3;
+}
+
+body.light-mode #contact-form button:last-child {
+    background: #6c757d;
+}
+
+body.light-mode #contact-form button:last-child:hover {
+    background: #545b62;
+}
+
+body.light-mode #welcome-popup {
+    background: #ffffff;
+    color: #1e1e1e;
+    border-color: #e0e0e0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+body.light-mode #mobile-message {
+    color: #666666;
+}
+
+.important:hover .description {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 17px;
+    }
+
+    .code-container {
+        max-width: 100%;
+    }
+
+    .flowchart {
+        gap: 5px;
+    }
+
+    .node {
+        min-width: 120px;
+        padding: 6px 10px;
+        font-size: 0.9em;
+    }
+
+    .sub-nodes {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .description {
+        position: static;
+        margin-top: 5px;
+        width: auto;
+        font-size: 0.8em;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 5px;
+        border-radius: 3px;
+    }
+
+    #hire-btn {
+        bottom: 10px;
+        right: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    #contact-form {
+        width: 95%;
+        max-width: none;
+        padding: 0;
+    }
+
+    #contact-form h3 {
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+
+    #contact-form input, #contact-form textarea {
+        font-size: 16px;
+        padding: 10px 12px;
+    }
+
+    .button-group {
+        padding: 10px 12px;
+    }
+
+    #contact-form button {
+        padding: 10px 16px;
+        font-size: 16px;
+    }
+
+    #mobile-message {
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+
+    .description {
+        width: 150px;
+        font-size: 0.7em;
+    }
+
+    #hire-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+
+    #contact-form h3 {
+        font-size: 14px;
+    }
+
+    #contact-form input, #contact-form textarea {
+        font-size: 14px;
+    }
+
+    #contact-form button {
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+}
+
+.cursor {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.important {
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.important {
+    cursor: pointer;
+}
+
+.important:hover {
+    text-decoration: underline;
+    transform: scale(1.05);
+    color: #fff;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .code-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+}
